@@ -95,7 +95,7 @@ function Settings() {
               type='text'
               name='pin'
               className='rounded-md'
-              value={pin}
+              placeholder='Ingrese una nueva'
               onChange={e => setName(e.target.value)}
             />
           </label>
