@@ -5,6 +5,7 @@ export interface User {
     username: string
     email: string
     puntos: number
+    password: string
     imagen: string
     pronosticos: Array<string>
   }

@@ -10,6 +10,7 @@ function Settings() {
   const { user, setUser } = userStore()
   const [name, setName] = useState(user?.username ? user?.username : '')
   const [img, setImg] = useState(user?.imagen ? user?.imagen : '')
+  const [pin, setPin] = useState(user?.password ? user?.password : '')
   const [enable, setEnable] = useState(false)
 
   const src =
@@ -18,9 +19,11 @@ function Settings() {
       : 'https://flowbite.com/docs/images/people/profile-picture-2.jpg'
 
   useEffect(() => {
-    if (name !== '' && img !== '') setEnable(true)
+    if ( img !== '') setEnable(true)
+    if (name !== '') setEnable(true)
+    if (pin !== '') setEnable(true)
     else setEnable(false)
-  }, [name, img])
+  }, [name, img, pin])
 
 
   // @ts-ignore
@@ -41,6 +44,7 @@ function Settings() {
       interface Send {
         username?: string
         imagen?: string | unknown
+        password?: string
       }
       let send: Send = {}
       if (name !== '') {
@@ -48,6 +52,9 @@ function Settings() {
       }
       if (img !== '') {
         send.imagen = img
+      }
+      if (pin !== '') {
+        send.password = pin
       }
       console.log(send)
       const { data }: AxiosResponse<User['body']> = await axios.put(
@@ -72,13 +79,23 @@ function Settings() {
             <img src={src} alt='user_image' className='user_image' />
           </picture>
 
-          <label className='flex flex-col gap-2 my-5 text-gray-800'>
+          <label className='flex flex-col gap-2 mt-5 text-gray-800'>
             Nombre
             <input
               type='text'
               name='name'
               className='rounded-md'
               value={name}
+              onChange={e => setName(e.target.value)}
+            />
+          </label>
+          <label className='flex flex-col gap-2  text-gray-800'>
+            Contraseña
+            <input
+              type='text'
+              name='pin'
+              className='rounded-md'
+              value={pin}
               onChange={e => setName(e.target.value)}
             />
           </label>
