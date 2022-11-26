@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { Layout } from '../components'
 import { axios } from '../services'
-import { userStore } from '../store'
+import { userStoreRecovery } from '../store/userRecovery'
 import { AxiosResponse } from 'axios'
-import { User } from '../types'
+import { UserRecovery } from '../types'
 
 function Settings() {
-  const { user, setUser } = userStore()
+  const { user, setUser } = userStoreRecovery()
   const [name, setName] = useState(user?.username ? user?.username : '')
   const [img, setImg] = useState(user?.imagen ? user?.imagen : '')
   const [pin, setPin] = useState(user?.password ? user?.password : '')
@@ -57,7 +57,7 @@ function Settings() {
         send.password = pin
       }
       console.log(send)
-      const { data }: AxiosResponse<User['body']> = await axios.put(
+      const { data }: AxiosResponse<UserRecovery['body']> = await axios.put(
         `/api/usuarios/${user?._id}`,
         send
       )

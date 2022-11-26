@@ -5,6 +5,17 @@ export interface User {
     username: string
     email: string
     puntos: number
+    imagen: string
+    pronosticos: Array<string>
+  }
+}
+export interface UserRecovery {
+  body: {
+    _id: string
+    name: string
+    username: string
+    email: string
+    puntos: number
     password: string
     imagen: string
     pronosticos: Array<string>
